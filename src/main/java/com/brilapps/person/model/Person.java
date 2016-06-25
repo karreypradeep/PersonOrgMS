@@ -15,16 +15,12 @@ package com.brilapps.person.model;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,9 +28,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.tomcat.jni.Address;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.brilapps.constants.GenderConstant;
@@ -83,25 +76,8 @@ public class Person extends BaseEntity implements Serializable {
 	@Column(name = "BIRTH_COUNTRY", length = 200)
 	private String					countryOfBirth;
 
-	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-	@Fetch(value = FetchMode.SUBSELECT)
-	private List<Address> addresses;
-
 	@Column(name = "RESERVATION", length = 50)
 	private String					reservation;
-
-	@Column(name = "OCCUPATION")
-	private String					occupation;
-
-	@Column(name = "ANNUAL_SALARY")
-	private Double				annualSalary;
-
-	/**
-	 * @return the annualSalary
-	 */
-	public Double getAnnualSalary() {
-		return annualSalary;
-	}
 
 	/**
 	 * @return the countryOfBirth
@@ -171,13 +147,6 @@ public class Person extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @return the occupation
-	 */
-	public String getOccupation() {
-		return occupation;
-	}
-
-	/**
 	 * @return the religion
 	 */
 	public String getReligion() {
@@ -189,20 +158,6 @@ public class Person extends BaseEntity implements Serializable {
 	 */
 	public String getReservation() {
 		return reservation;
-	}
-
-	/**
-	 * @param addresses the addresses to set
-	 */
-	public void setAddresses(final List<Address> addresses) {
-		this.addresses = addresses;
-	}
-
-	/**
-	 * @param annualSalary the annualSalary to set
-	 */
-	public void setAnnualSalary(final Double annualSalary) {
-		this.annualSalary = annualSalary;
 	}
 
 	/**
@@ -273,19 +228,11 @@ public class Person extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param occupation the occupation to set
-	 */
-	public void setOccupation(final String occupation) {
-		this.occupation = occupation;
-	}
-
-	/**
 	 * @param religion the religion to set
 	 */
 	public void setReligion(final String religion) {
 		this.religion = religion;
 	}
-
 
 	/**
 	 * @param reservation the reservation to set
@@ -293,6 +240,4 @@ public class Person extends BaseEntity implements Serializable {
 	public void setReservation(final String reservation) {
 		this.reservation = reservation;
 	}
-
-
 }
